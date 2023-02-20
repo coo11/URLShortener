@@ -1,17 +1,18 @@
-name = "kes_im"
-type = "webpack"
+name = "url-shortener"
+main = "src/index.js"
+compatibility_date = "2022-07-12"
+
+account_id = "66b1a0ce80322d2eb8fc734d936a2f85"
+
 workers_dev = false
-account_id = "f6eb193c5ada002251ec96253583e74d"
-zone_id = "5b5fa1156dac645ae9a36479bf982e10"
+
 routes = [
-  "kes.im/*",
-  "api.kes.im/*"
+  "ehhh.eu.org/*",
+  "api.ehhh.eu.org/*"
 ]
 
-[[kv_namespaces]]
-binding = "kesim_data"
-id = "767fc2258dd94aa09ddcacdac19b1e23"
-preview_id=""
+kv_namespaces = [
+  { binding = "URLSHTNR", id = "599a80a92b7c4f6e8502dbb0b9d4f397" }
+]
 
-[site]
-bucket = "./public"
+site = { bucket = "./public" }

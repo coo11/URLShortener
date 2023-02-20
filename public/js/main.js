@@ -1,25 +1,33 @@
-const alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\\-\\_';
-const slugRegex = new RegExp(`(?!.*(-|_)$)(?!^(-|_).*)^[${alphabet}]{3,}$`, 'i');
+const alphabet =
+  "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\\-\\_";
+const slugRegex = new RegExp(
+  `(?!.*(-|_)$)(?!^(-|_).*)^[${alphabet}]{3,}$`,
+  "i"
+);
 const URLRegex = /^(https?:\/\/[^\s\.]+\.[^\s]{2,})/i;
 
 const ErrorCodes = {
-  UNKNOWN: {code: 'UNKNOWN', message: 'Server in trouble, try later please.'},
-  BAD_URL: {code: 'BAD_URL', message: 'Provided URL is not a valid one.'},
-  BAD_SLUG: {code: 'BAD_SLUG', message: 'Slug is not in correct format.'},
-  NO_RECURSIVE: {code: 'NO_RECURSIVE', message: 'No recursive shortening.'}
+  UNKNOWN: { code: "UNKNOWN", message: "Server in trouble, try later please." },
+  BAD_URL: { code: "BAD_URL", message: "Provided URL is not a valid one." },
+  BAD_SLUG: { code: "BAD_SLUG", message: "Slug is not in correct format." },
+  NO_RECURSIVE: { code: "NO_RECURSIVE", message: "No recursive shortening." },
+  PRIVATE_USE: {
+    code: "PRIVATE_USE",
+    message: "Service is not available now.",
+  },
 };
 
 const body = document.body;
-const resultList = document.getElementById('results');
-const cutButton = document.getElementById('cutButton');
-const urlInput = document.getElementById('urlInput');
-const slugInput = document.getElementById('slugInput');
+const resultList = document.getElementById("results");
+const cutButton = document.getElementById("cutButton");
+const urlInput = document.getElementById("urlInput");
+const slugInput = document.getElementById("slugInput");
 
 let _inProgress = false;
 function inProgress(status) {
-  if (typeof status === 'undefined') return _inProgress;
+  if (typeof status === "undefined") return _inProgress;
   _inProgress = status;
-  body.classList[status ? 'add' : 'remove']('in-progress');
+  body.classList[status ? "add" : "remove"]("in-progress");
 }
 
 async function cut() {
@@ -32,7 +40,7 @@ async function cut() {
   resetErrors();
 
   let urlError;
-  if (urlError = isURLHasError(url)) {
+  if ((urlError = isURLHasError(url))) {
     inProgress(false);
     return showError(urlError);
   }
@@ -43,10 +51,10 @@ async function cut() {
     return showError(slugError);
   }
 
-  const response = await fetch('https://api.kes.im/shorten', {
-    method: 'POST',
-    headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
-    body: JSON.stringify({url, slug}),
+  const response = await fetch("https://api.ehhh.eu.org/shorten", {
+    method: "POST",
+    headers: { Accept: "application/json", "Content-Type": "application/json" },
+    body: JSON.stringify({ url, slug }),
   });
 
   const data = await response.json();
@@ -62,30 +70,40 @@ async function cut() {
     return showError(error);
   }
 
-  resultList.insertAdjacentHTML('afterbegin', `
+  resultList.insertAdjacentHTML(
+    "afterbegin",
+    `
     <li class="result-item">
-      <a target="_blank" rel="nofollow" href="https://kes.im/${data.shortLink}">
-        https://kes.im/${cutString(data.shortLink, 40)}
+      <a target="_blank" rel="nofollow" href="https://ehhh.eu.org/${
+        data.shortLink
+      }">
+        https://ehhh.eu.org/${cutString(data.shortLink, 40)}
       </a>
       <div class="original-url">${cutString(url, 40)}</div>
-      <button class="copy-button" onclick="copy(event, '${data.shortLink}')">Copy URL</button>
+      <button class="copy-button" onclick="copy(event, '${
+        data.shortLink
+      }')">Copy URL</button>
     </li>
-  `);
+  `
+  );
 
-  urlInput.value = '';
-  slugInput.value = '';
+  urlInput.value = "";
+  slugInput.value = "";
 
   inProgress(false);
 }
 
 function showError(error) {
-  resultList.insertAdjacentHTML('afterbegin', `
+  resultList.insertAdjacentHTML(
+    "afterbegin",
+    `
     <li class="result-item result-error">Error: ${error.message}</li>
-  `);
+  `
+  );
 }
 
 function resetErrors() {
-  resultList.querySelectorAll('.result-error').forEach(element => {
+  resultList.querySelectorAll(".result-error").forEach(element => {
     resultList.removeChild(element);
   });
 }
@@ -101,7 +119,7 @@ function isURLHasError(url) {
     const parsedURL = new URL(url);
 
     // No recursive business.
-    if (parsedURL.hostname.endsWith('kes.im')) {
+    if (parsedURL.hostname.endsWith("ehhh.eu.org")) {
       return ErrorCodes.NO_RECURSIVE;
     }
   } catch (e) {
@@ -110,27 +128,36 @@ function isURLHasError(url) {
 }
 
 function isSlugGHasError(slug) {
-  if (!slugRegex.test(slug)) {
-    return ErrorCodes.BAD_SLUG;
-  }
+  let [path, hash] = slug.split("#");
+  if (
+    (slugRegex.test(path) || path === "") &&
+    (!hash || /^[\w-]+$/i.test(hash))
+  );
+  else return ErrorCodes.BAD_SLUG;
 }
 
 function cutString(string, maxLength) {
   if (string.length <= maxLength) return string;
   const maxHalfLength = (maxLength - 3) / 2;
-  return `${string.substr(0, maxHalfLength)}...${string.substr(-maxHalfLength)}`;
+  return `${string.substr(0, maxHalfLength)}...${string.substr(
+    -maxHalfLength
+  )}`;
 }
 
 function copy(event, shortLink) {
-  navigator.clipboard.writeText(`https://kes.im/${shortLink}`);
+  navigator.clipboard.writeText(`https://ehhh.eu.org/${shortLink}`);
 
-  document.querySelectorAll('.copy-button').forEach(button => {
-    button.classList.remove('copied');
-    button.innerText = 'Copy';
+  document.querySelectorAll(".copy-button").forEach(button => {
+    button.classList.remove("copied");
+    button.innerText = "Copy";
   });
 
-  event.target.classList.add('copied');
-  event.target.innerText = 'Copied';
+  event.target.classList.add("copied");
+  event.target.innerText = "Copied";
+  setTimeout(() => {
+    event.target.classList.remove("copied");
+    event.target.innerText = "Copy";
+  }, 1000);
 }
 
-cutButton.addEventListener('click', cut);
+cutButton.addEventListener("click", cut);

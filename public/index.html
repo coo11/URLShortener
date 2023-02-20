@@ -1,51 +1,78 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Meta -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Shorten your links | kes.im</title>
-        <meta name="description" content="Kes.im, no-log url shortener.">
-        <meta name="keywords" content="kes.im, kesim, link shortener, no-log, zero-log">
-        <meta name="author" content="Rameş Aliyev">
-        <link rel="icon" type="image/png" href="/favicon.png" />
+  <head>
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shorten your links | ehhh.eu.org</title>
+    <meta
+      name="description"
+      content="No-log url shortener forked form kes.im"
+    />
+    <meta name="author" content="Rameş Aliyev" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
 
-        <!-- OG -->
-        <meta property="og:title" content="Shorten your links | kes.im" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://kes.im" />
-        <meta property="og:image" content="/img/emblem_square.png" />
+    <!-- OG -->
+    <meta property="og:title" content="Shorten your links | ehhh.eu.org" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ehhh.eu.org" />
 
-        <!-- Assets -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/css/main.css">
-    </head>
-    <body>
-        <div class="wrapper">
-            <main class="root">
-                <img class="logo" src="/img/logo_en.svg" />
-                <div class="link-input-wrapper">
-                    <input type="url" id="urlInput" placeholder="Shorten your link" />
-                    <button id="cutButton" class="cut-button loading">
-                        <span>Cut</span>
-                        <div class="loader"></div>
-                    </button>
-                </div>
-                <div class="custom-tag-wrapper">
-                    <strong>kes.im/</strong>
-                    <input id="slugInput" placeholder="your very special keyword, only a-z, A-Z, 0-9, and - or _ (can't start or end with _ or -)" />
-                </div>
-                <div class="results-wrapper">
-                    <ul class="results-list" id="results"></ul>
-                </div>
-                <div class="about">
-                    kes.im, no-log url shortener<br>
-                    developed by <a target="_blank" href="https://rames.dev">rames</a>, designed by <a target="_blank" href="http://www.hellocihan.com/">cihan</a><br>
-                    works on top of <a rel="nofollow" target="_blank" href="https://workers.cloudflare.com/" >cloudflare workers</a><br>
-                    opensourced on <a rel="nofollow" target="_blank" href="https://github.com/ramesaliyev/kes.im">github</a>
-                </div>
-            </main>
+    <!-- Assets -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <main class="root">
+        <div class="title">URL Shortener</div>
+        <div class="link-input-wrapper">
+          <input
+            type="url"
+            id="urlInput"
+            placeholder="Paste or input your link"
+          />
+          <button id="cutButton" class="cut-button loading">
+            <span>Cut</span>
+            <div class="loader"></div>
+          </button>
         </div>
-        <script type="text/javascript" src="/js/main.js"></script>
-    </body>
+        <div class="custom-tag-wrapper">
+          <strong>ehhh.eu.org/</strong>
+          <input
+            id="slugInput"
+            placeholder="your very special keyword, only a-z, A-Z, 0-9, and - or _ (can't start or end with _ or -)"
+          />
+        </div>
+        <div class="results-wrapper">
+          <ul class="results-list" id="results"></ul>
+        </div>
+        <div class="about">
+          ehhh.eu.org, no-log url shortener forked form
+          <a rel="nofollow" target="_blank" href="https://kes.im/">kes.im</a
+          ><br />
+          developed by <a target="_blank" href="https://rames.dev">rames</a>,
+          designed by
+          <a target="_blank" href="http://www.hellocihan.com/">cihan</a><br />
+          works on top of
+          <a
+            rel="nofollow"
+            target="_blank"
+            href="https://workers.cloudflare.com/"
+            >cloudflare workers</a
+          ><br />
+          opensourced on
+          <a
+            rel="nofollow"
+            target="_blank"
+            href="https://github.com/ramesaliyev/kes.im"
+            >github</a
+          >
+        </div>
+      </main>
+    </div>
+    <script type="text/javascript" src="/js/main.js"></script>
+  </body>
 </html>
