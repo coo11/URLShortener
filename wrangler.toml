@@ -1,6 +1,6 @@
 name = "url-shortener"
 main = "src/index.js"
-compatibility_date = "2022-07-12"
+compatibility_date = "2023-07-23"
 
 account_id = "66b1a0ce80322d2eb8fc734d936a2f85"
 
