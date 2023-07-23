@@ -21,7 +21,7 @@ async function redirect(event) {
     const response = new Response(redirres.body, redirres);
 
     // Cache
-    response.headers.append("Cache-Control", "max-age=31536000");
+    response.headers.append('Cache-Control', 'max-age=31536000');
     response.headers.append('X-Robots-Tag', 'noindex');
     event.waitUntil(cache.put(request, response.clone()));
 

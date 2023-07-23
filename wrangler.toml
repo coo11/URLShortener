@@ -10,6 +10,8 @@ routes = [
   "ehhh.eu.org/*",
   "api.ehhh.eu.org/*"
 ]
+main = "workers-site/index.js"
+compatibility_date = "2023-03-12"
 
 kv_namespaces = [
   { binding = "URLSHTNR", id = "599a80a92b7c4f6e8502dbb0b9d4f397" }
